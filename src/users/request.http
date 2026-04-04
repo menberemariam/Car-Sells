@@ -1,0 +1,39 @@
+###CREATE USER
+
+POST http://localhost:4100/auth/signup
+content-type: application/json
+
+{
+  "email": "Mesi@gmail.com",
+  "password": "passwordMeh"
+}
+
+###
+
+POST http://localhost:4100/auth/signin
+content-type: application/json
+
+{
+  "email": "Meh@gmail.com",
+  "password": "passordMeh"
+}
+####SIGNIN USER
+GET http://localhost:4100/auth/whoami
+
+###Find Particular User by ID
+
+GET http://localhost:4100/auth/6
+
+###Find all users with email
+GET http://localhost:4100/auth?email=mem@gmail.com
+
+###Delete user by a given ID
+DELETE http://localhost:4100/auth/5
+
+###Update user by a given ID
+PATCH http://localhost:4100/auth/6
+content-type: application/json
+
+{
+  "email": "ehet@gmail.com"
+}
