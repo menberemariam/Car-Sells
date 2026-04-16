@@ -25,7 +25,7 @@ describe('AuthService', () => {
         users.push(user);
         return Promise.resolve(user);
       },
-    };  
+    };
 
     const module = await Test.createTestingModule({
       providers: [

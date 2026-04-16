@@ -37,6 +37,9 @@ import cookieSession from 'cookie-session';
       provide: APP_PIPE,
       useValue: new ValidationPipe({
         whitelist: true,
+        forbidNonWhitelisted: true,
+        transform: true,
+        transformOptions: { enableImplicitConversion: true },
       }),
     },
   ],
