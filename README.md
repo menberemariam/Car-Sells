@@ -20,79 +20,351 @@
 </p>
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# 🚗 Car Sells API
 
-## Description
+A modern backend REST API built with **NestJS**, **TypeORM**, and **SQLite** for managing vehicle sale reports and estimating car market prices.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+The project demonstrates how a real-world car marketplace backend can authenticate users, manage vehicle reports, and generate market value estimates using historical vehicle data.
 
-## Project setup
+> This project is designed as the foundation for a production-ready online car marketplace similar to AutoTrader, CarGurus, Cars.com, or Jiji Motors.
 
-```bash
-$ npm install
+---
+
+## ✨ Features
+
+### Authentication
+
+- User registration
+- User login/logout
+- Password hashing
+- Session-based authentication
+- Current authenticated user endpoint
+- Route protection using Guards
+
+### Authorization
+
+- Role-based authorization
+- Admin-only endpoints
+- Report approval workflow
+
+### Vehicle Reports
+
+Users can create vehicle reports including:
+
+- Make
+- Model
+- Year
+- Mileage
+- Price
+- Longitude
+- Latitude
+
+### Price Estimation
+
+Estimate a vehicle's market value based on:
+
+- Vehicle make
+- Model
+- Manufacturing year
+- Mileage
+- Geographic location
+
+Only approved reports are used when generating price estimates.
+
+### Validation
+
+Input validation using DTOs and `class-validator`.
+
+### Testing
+
+- Unit tests
+- End-to-end tests
+- Jest testing configuration
+
+---
+
+# Tech Stack
+
+| Technology | Description |
+|------------|-------------|
+| NestJS | Backend framework |
+| TypeScript | Main programming language |
+| TypeORM | ORM |
+| SQLite | Database |
+| class-validator | Request validation |
+| cookie-session | Session authentication |
+| Jest | Testing |
+
+---
+
+# Project Structure
+
+```
+src
+│
+├── users
+│   ├── auth.service.ts
+│   ├── users.service.ts
+│   ├── user.entity.ts
+│   ├── dtos
+│   ├── decorators
+│   └── interceptors
+│
+├── reports
+│   ├── reports.controller.ts
+│   ├── reports.service.ts
+│   ├── reports.entity.ts
+│   └── dto
+│
+├── guards
+│   ├── auth.guard.ts
+│   └── admin.guard.ts
+│
+├── app.module.ts
+└── main.ts
 ```
 
-## Compile and run the project
+---
 
-```bash
-# development
-$ npm run start
+# How It Works
 
-# watch mode
-$ npm run start:dev
+## Authentication Flow
 
-# production mode
-$ npm run start:prod
+```
+User
+   │
+   ▼
+Sign Up / Login
+   │
+Password Hashing
+   │
+Session Created
+   │
+cookie-session
+   │
+Protected Routes
 ```
 
-## Run tests
+---
 
-```bash
-# unit tests
-$ npm run test
+## Car Price Estimation Flow
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```
+User
+   │
+Create Report
+   │
+Admin Approval
+   │
+Approved Reports
+   │
+Price Estimation Engine
+   │
+Estimated Market Price
 ```
 
-## Deployment
+---
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+# API Modules
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+## Users
+
+Responsible for:
+
+- Register users
+- Login
+- Logout
+- Retrieve current user
+- Update user
+
+---
+
+## Reports
+
+Responsible for:
+
+- Create reports
+- Generate estimates
+- Approve reports
+- Retrieve report data
+
+---
+
+## Guards
+
+### Auth Guard
+
+Ensures only authenticated users can access protected endpoints.
+
+### Admin Guard
+
+Restricts administrative actions such as report approval.
+
+---
+
+# Installation
+
+Clone the repository
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+git clone https://github.com/menberemariam/Car-Sells.git
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Navigate into the project
 
-## Resources
+```bash
+cd Car-Sells
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+Install dependencies
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```bash
+npm install
+```
 
-## Support
+Start development server
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+npm run start:dev
+```
 
-## Stay in touch
+The server runs on
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```
+http://localhost:4100
+```
 
-## License
+---
+
+# Running Tests
+
+Unit Tests
+
+```bash
+npm run test
+```
+
+Watch Mode
+
+```bash
+npm run test:watch
+```
+
+Coverage
+
+```bash
+npm run test:cov
+```
+
+End-to-End Tests
+
+```bash
+npm run test:e2e
+```
+
+---
+
+# Environment Variables
+
+Create:
+
+```
+.env.development
+```
+
+Example
+
+```env
+DB_NAME=db.sqlite
+PORT=4100
+COOKIE_KEY=your-secret-key
+```
+
+---
+
+# Future Improvements
+
+This project is currently a learning-focused backend and will evolve into a complete production-ready vehicle marketplace.
+
+Planned features include:
+
+- PostgreSQL support
+- JWT Authentication
+- Refresh Tokens
+- Email Verification
+- Vehicle Images
+- Cloudinary Integration
+- Advanced Search & Filtering
+- Vehicle Listings
+- Buyer/Seller Messaging
+- Favorites
+- Reviews & Ratings
+- Dealer Accounts
+- Payment Integration
+- Redis Caching
+- Docker Support
+- CI/CD
+- Swagger Documentation
+- Recommendation Engine
+- AI-powered Price Prediction
+
+---
+
+# Learning Objectives
+
+This project demonstrates practical backend development concepts including:
+
+- NestJS Architecture
+- Dependency Injection
+- Authentication & Authorization
+- Session Management
+- TypeORM
+- Entity Relationships
+- DTO Validation
+- Guards
+- Interceptors
+- RESTful API Design
+- Repository Pattern
+- Unit Testing
+- End-to-End Testing
+
+---
+
+# Roadmap
+
+- [x] User Authentication
+- [x] Session Management
+- [x] Report Creation
+- [x] Admin Approval
+- [x] Price Estimation
+- [x] Validation
+- [x] Testing
+- [ ] Vehicle Listings
+- [ ] Image Uploads
+- [ ] PostgreSQL Migration
+- [ ] JWT Authentication
+- [ ] Messaging
+- [ ] Favorites
+- [ ] Reviews
+- [ ] Notifications
+- [ ] Payments
+- [ ] Admin Dashboard
+- [ ] AI Price Prediction
+
+---
+
+# License
+
+This project is open source and available under the MIT License.
+
+---
+
+## Author
+
+**Menberemariam**
+
+Backend Developer | NestJS | TypeScript | Node.js
+
+If you found this project helpful, consider giving it a ⭐ on GitHub.
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
